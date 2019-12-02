@@ -230,7 +230,6 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-  console.log(str.split('').map((x) => x.charCodeAt(0) + 13));
   return String.fromCharCode.apply(null, str.split('').map((x) => {
     const code = x.charCodeAt(0);
     if (code >= 65 && code <= 90) {
