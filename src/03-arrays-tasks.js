@@ -465,8 +465,9 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (v, i) => Array.from({ length: n },
+    (x, ind) => (i === ind ? 1 : 0)));
 }
 
 /**
@@ -482,8 +483,15 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  if (start === end) {
+    return [start];
+  }
+  let value = start - 1;
+  return Array.from({ length: end - value }, () => {
+    value += 1;
+    return value;
+  });
 }
 
 /**
@@ -497,8 +505,15 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const map = new Map();
+  return arr.filter((x) => {
+    if (map.has(x)) {
+      return false;
+    }
+    map.set(x, 0);
+    return true;
+  });
 }
 
 /**
@@ -531,8 +546,17 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const map = new Map();
+  array.map((x) => {
+    if (map.has(keySelector(x))) {
+      map.get(keySelector(x)).push(valueSelector(x));
+      return x;
+    }
+    map.set(keySelector(x), [valueSelector(x)]);
+    return x;
+  });
+  return map;
 }
 
 
@@ -588,7 +612,7 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2 ]  => [ 2, 1 ]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
- */
+ */ 
 function swapHeadAndTail(/* arr */) {
   throw new Error('Not implemented');
 }
