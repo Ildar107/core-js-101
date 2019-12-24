@@ -245,7 +245,6 @@ describe('06-objects-tasks', () => {
         + 'if element, id or pseudo-element occurs twice or more times',
       );
     });
-
     [
       () => builder.class('draggable').class('animated'),
       () => builder.attr('href').attr('title'),
